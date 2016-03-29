@@ -13,7 +13,7 @@
 {% block content %}
     <h2>Danh sách phường/xã</h2>
     <br>
-    {{ form('ward', 'method': 'post') }}
+    {{ form('ward', 'method': 'get') }}
         <table>
             <tr>
                 <th>Chọn tỉnh</th>

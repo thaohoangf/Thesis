@@ -32,13 +32,13 @@
         {% for district in district %}
             <div class="list-group-item" style="cursor: pointer">
                 {% if district['type'] == 1 %}
-                    {{ link_to('ward?province='~province.id~'&&district='~district['id'],'Quận '~district['name']) }}
+                    {{ link_to('ward?district='~district['id'],'Quận '~district['name']) }}
                 {% elseif district['type'] == 2 %}
-                    {{ link_to('ward?province='~province.id~'&&district='~district['id'],'Huyện '~district['name']) }}
+                    {{ link_to('ward?district='~district['id'],'Huyện '~district['name']) }}
                 {% elseif district['type'] == 3 %}
-                    {{ link_to('ward?province='~province.id~'&&district='~district['id'],'Thị Xã '~district['name']) }}
+                    {{ link_to('ward?district='~district['id'],'Thị Xã '~district['name']) }}
                 {% else %}
-                    {{ link_to('ward?province='~province.id~'&&district='~district['id'],'Thành Phố '~district['name']) }}
+                    {{ link_to('ward?district='~district['id'],'Thành Phố '~district['name']) }}
                 {% endif %}
                 {{ link_to('district/delete/'~district['id']~'?province='~province.id,'Xóa','style':"float: right; display: none; margin-left: 10px",'class':'delete') }}
                 {{ link_to('district/edit/'~district['id']~'?province='~province.id,'Chỉnh sửa','style':"float: right; display: none;",'class':'delete') }}
