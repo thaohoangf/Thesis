@@ -26,6 +26,6 @@
         </div>
         {{ submit_button('Thêm', 'class': 'btn btn-info') }}
     </div>
-        {{ hidden_field('province_id',province) }}
+        {{ hidden_field('province_id','value':province) }}
     {{ endform() }}
 {% endblock %}

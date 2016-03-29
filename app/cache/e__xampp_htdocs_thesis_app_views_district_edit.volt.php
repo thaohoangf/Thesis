@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Thêm tỉnh</title>
+    <title><?php echo $district->name; ?></title>
     <?php echo $this->tag->stylesheetLink('css/bootstrap.min.css'); ?>
     <?php echo $this->tag->stylesheetLink('css/simple-sidebar.css'); ?>
 
@@ -32,9 +32,9 @@
                 Xin chào, Admin
             </li>
             
-    <li><?php echo $this->tag->linkTo(array('district', 'Danh sách quận/huyện')); ?></li>
     <li><?php echo $this->tag->linkTo(array('province', 'Danh sách tỉnh/thành')); ?></li>
     <li><?php echo $this->tag->linkTo(array('users', 'Danh sách người dùng')); ?></li>
+    <li><?php echo $this->tag->linkTo(array('district', 'Danh sách quận/huyện')); ?></li>
     <li><?php echo $this->tag->linkTo(array('ward', 'Danh sách phường/xã')); ?></li>
     <li><?php echo $this->tag->linkTo(array('major', 'Danh sách ngành học')); ?></li>
     <li><?php echo $this->tag->linkTo(array('ethnic', 'Danh sách dân tộc')); ?></li>
@@ -45,22 +45,21 @@
     <div id="page-content-wrapper">
         <div class="container-fluid">
             
-    <h2>
-        Thêm quận/huyện
-    </h2>
-    <?php echo $this->tag->form(array('district/add?province=' . $province, 'method' => 'post')); ?>
-    <div class="form-group">
-        <div class="col-xs-3">
-            <label for="name">Tên quận/huyện</label>
-            <?php echo $this->tag->textField(array('name', 'class' => 'form-control')); ?>
-        </div>
-        <div class="col-xs-3" >
-            <label for="name">Loại</label>
-            <?php echo $this->tag->selectStatic(array('class' => 'form-control', 'type', array('1' => 'Quận', '2' => 'Huyện', '3' => 'Thị xã', '4' => 'Thành Phố'))); ?>
-        </div>
-        <?php echo $this->tag->submitButton(array('Thêm', 'class' => 'btn btn-info')); ?>
-    </div>
-        <?php echo $this->tag->hiddenField(array('province_id', 'value' => $province)); ?>
+    <h2>Chỉnh sửa thông tin quận/huyện</h2>
+
+    <?php echo $this->tag->form(array('district/edit/' . $district->id, 'method' => 'post')); ?>
+        <table style="margin: 10px">
+            <tr>
+                <th>Tên</th>
+                <th>Đơn vị hành chính</th>
+            </tr>
+            <tr>
+                <td style="padding-right: 10px"><?php echo $this->tag->textField(array('name', 'value' => $district->name)); ?></td>
+                <td><?php echo $this->tag->selectStatic(array('type', array('1' => 'Quận', '2' => 'Huyện', '3' => 'Thị Xã', '4' => 'Thành Phố'), 'value' => $district->type)); ?></td>
+            </tr>
+        <?php echo $this->tag->hiddenField(array('province_id', 'value' => $district->provinceid)); ?>
+        </table>
+        <?php echo $this->tag->submitButton(array('Chỉnh sửa')); ?>
     <?php echo $this->tag->endform(); ?>
 
         </div>

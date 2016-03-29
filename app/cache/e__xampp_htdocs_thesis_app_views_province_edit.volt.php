@@ -48,8 +48,20 @@
     <h2>Chỉnh sửa thông tin tỉnh/thành</h2>
 
     <?php echo $this->tag->form(array('province/edit/' . $province->id, 'method' => 'post')); ?>
-        <?php echo $this->tag->textField(array('name', 'value' => $province->name)); ?>
-        <?php echo $this->tag->selectStatic(array('type', array('1' => 'Tỉnh', '2' => 'Thành phố'), 'value' => $province->type)); ?>
+    <table style="margin: 10px">
+        <tr>
+            <th>Tên</th>
+            <th>Đơn vị hành chính</th>
+        </tr>
+        <tr>
+            <td style="padding-right: 10px">
+                <?php echo $this->tag->textField(array('name', 'value' => $province->name)); ?>
+            </td>
+            <td>
+                <?php echo $this->tag->selectStatic(array('type', array('1' => 'Tỉnh', '2' => 'Thành phố'), 'value' => $province->type)); ?>
+            </td>
+        </tr>
+    </table>
         <?php echo $this->tag->submitButton(array('Chỉnh sửa', 'name' => 'edit')); ?>
     <?php echo $this->tag->endform(); ?>
 

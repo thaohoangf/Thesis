@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Danh sách quận/huyện</title>
+    <title>Danh sách tỉnh</title>
     <?php echo $this->tag->stylesheetLink('css/bootstrap.min.css'); ?>
     <?php echo $this->tag->stylesheetLink('css/simple-sidebar.css'); ?>
 
@@ -32,9 +32,9 @@
                 Xin chào, Admin
             </li>
             
-    <li><?php echo $this->tag->linkTo(array('district', 'Danh sách quận/huyện')); ?></li>
     <li><?php echo $this->tag->linkTo(array('province', 'Danh sách tỉnh/thành')); ?></li>
     <li><?php echo $this->tag->linkTo(array('users', 'Danh sách người dùng')); ?></li>
+    <li><?php echo $this->tag->linkTo(array('district', 'Danh sách quận/huyện')); ?></li>
     <li><?php echo $this->tag->linkTo(array('ward', 'Danh sách phường/xã')); ?></li>
     <li><?php echo $this->tag->linkTo(array('major', 'Danh sách ngành học')); ?></li>
     <li><?php echo $this->tag->linkTo(array('ethnic', 'Danh sách dân tộc')); ?></li>
@@ -46,36 +46,31 @@
         <div class="container-fluid">
             
     <h2>
-        Danh sách quận/huyện <?php if ($province->type == 1) { ?>Tỉnh<?php } else { ?>Thành Phố<?php } ?> <?php echo $province->name; ?>
+        Danh sách các quận/huyện
     </h2>
-
     <div class="search" style="padding-bottom: 10px">
         <?php echo $this->tag->form(array('district/search', 'method' => 'get')); ?>
-        <?php echo $this->tag->textField(array('district', 'name' => 'district')); ?>
-        <?php echo $this->tag->hiddenField(array('province_id', 'value' => $province->id)); ?>
-        <?php echo $this->tag->submitButton(array('Tìm kiếm')); ?>
+            <?php echo $this->tag->textField(array('district', 'name' => 'district')); ?>
+            <?php echo $this->tag->submitButton(array('Tìm kiếm')); ?>
         <?php echo $this->tag->endform(); ?>
     </div>
-
-
     <div class="button" style="padding-bottom: 10px;">
-        <?php echo $this->tag->linkTo(array('district/add?province=' . $province->id, 'Thêm quận', 'class' => 'btn btn-info')); ?>
+        <?php echo $this->tag->linkTo(array('district/add', 'Thêm quận/huyện', 'class' => 'btn btn-info')); ?>
     </div>
-
     <div class="list-group">
         <?php foreach ($district as $district) { ?>
             <div class="list-group-item" style="cursor: pointer">
                 <?php if ($district['type'] == 1) { ?>
-                    <?php echo $this->tag->linkTo(array('ward?province=' . $province->id . '&&district=' . $district['id'], 'Quận ' . $district['name'])); ?>
+                    <?php echo $this->tag->linkTo(array('district/' . $district['id'], 'Quận ' . $district['name'])); ?>
                 <?php } elseif ($district['type'] == 2) { ?>
-                    <?php echo $this->tag->linkTo(array('ward?province=' . $province->id . '&&district=' . $district['id'], 'Huyện ' . $district['name'])); ?>
+                    <?php echo $this->tag->linkTo(array('district/' . $district['id'], 'Huyện ' . $district['name'])); ?>
                 <?php } elseif ($district['type'] == 3) { ?>
-                    <?php echo $this->tag->linkTo(array('ward?province=' . $province->id . '&&district=' . $district['id'], 'Thị Xã ' . $district['name'])); ?>
-                <?php } else { ?>
-                    <?php echo $this->tag->linkTo(array('ward?province=' . $province->id . '&&district=' . $district['id'], 'Thành Phố ' . $district['name'])); ?>
+                    <?php echo $this->tag->linkTo(array('district/' . $district['id'], 'Thị xã ' . $district['name'])); ?>
+                <?php } elseif ($district['type'] == 2) { ?>
+                    <?php echo $this->tag->linkTo(array('district/' . $district['id'], 'Thành Phố ' . $district['name'])); ?>
                 <?php } ?>
-                <?php echo $this->tag->linkTo(array('district/delete/' . $district['id'] . '?province=' . $province->id, 'Xóa', 'style' => 'float: right; display: none; margin-left: 10px', 'class' => 'delete')); ?>
-                <?php echo $this->tag->linkTo(array('district/edit/' . $district['id'] . '?province=' . $province->id, 'Chỉnh sửa', 'style' => 'float: right; display: none;', 'class' => 'delete')); ?>
+                <?php echo $this->tag->linkTo(array('district/delete/' . $district['id'], 'Xóa', 'style' => 'float: right; display: none; margin-left: 10px', 'class' => 'delete')); ?>
+                <?php echo $this->tag->linkTo(array('district/edit/' . $district['id'], 'Chỉnh sửa', 'style' => 'float: right; display: none;', 'class' => 'delete')); ?>
             </div>
         <?php } ?>
     </div>

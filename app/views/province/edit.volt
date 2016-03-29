@@ -14,8 +14,20 @@
     <h2>Chỉnh sửa thông tin tỉnh/thành</h2>
 
     {{ form('province/edit/'~province.id,'method': 'post') }}
-        {{ text_field('name', 'value': province.name) }}
-        {{ select_static('type', ['1': 'Tỉnh', '2': 'Thành phố'], 'value': province.type) }}
+    <table style="margin: 10px">
+        <tr>
+            <th>Tên</th>
+            <th>Đơn vị hành chính</th>
+        </tr>
+        <tr>
+            <td style="padding-right: 10px">
+                {{ text_field('name', 'value': province.name) }}
+            </td>
+            <td>
+                {{ select_static('type', ['1': 'Tỉnh', '2': 'Thành phố'], 'value': province.type) }}
+            </td>
+        </tr>
+    </table>
         {{ submit_button('Chỉnh sửa','name': 'edit') }}
     {{ endform() }}
 {% endblock %}

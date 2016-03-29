@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Thêm tỉnh</title>
+    <title>Chọn tỉnh/thành</title>
     <?php echo $this->tag->stylesheetLink('css/bootstrap.min.css'); ?>
     <?php echo $this->tag->stylesheetLink('css/simple-sidebar.css'); ?>
 
@@ -46,22 +46,20 @@
         <div class="container-fluid">
             
     <h2>
-        Thêm quận/huyện
+        Chọn tỉnh/thành
     </h2>
-    <?php echo $this->tag->form(array('district/add?province=' . $province, 'method' => 'post')); ?>
-    <div class="form-group">
-        <div class="col-xs-3">
-            <label for="name">Tên quận/huyện</label>
-            <?php echo $this->tag->textField(array('name', 'class' => 'form-control')); ?>
-        </div>
-        <div class="col-xs-3" >
-            <label for="name">Loại</label>
-            <?php echo $this->tag->selectStatic(array('class' => 'form-control', 'type', array('1' => 'Quận', '2' => 'Huyện', '3' => 'Thị xã', '4' => 'Thành Phố'))); ?>
-        </div>
-        <?php echo $this->tag->submitButton(array('Thêm', 'class' => 'btn btn-info')); ?>
+
+    <div class="list-group">
+        <?php foreach ($province as $province) { ?>
+            <div class="list-group-item" style="cursor: pointer">
+                <?php if ($province['type'] == 1) { ?>
+                    <?php echo $this->tag->linkTo(array('district?province=' . $province['id'], 'Tỉnh ' . $province['name'])); ?>
+                <?php } else { ?>
+                    <?php echo $this->tag->linkTo(array('district?province=' . $province['id'], 'Thành Phố ' . $province['name'])); ?>
+                <?php } ?>
+            </div>
+        <?php } ?>
     </div>
-        <?php echo $this->tag->hiddenField(array('province_id', 'value' => $province)); ?>
-    <?php echo $this->tag->endform(); ?>
 
         </div>
     </div>
